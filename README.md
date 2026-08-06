@@ -2,6 +2,7 @@
 
   <img src="icon.png" alt="PrivaEXIF Logo" width="128" height="128">
 
+
   # 🛡️ PrivaEXIF
 
   **Privacy-First Local Metadata Scrubber & EXIF/Video Inspector**
