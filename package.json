@@ -1,9 +1,9 @@
 {
-  "name": "exif-b-gone",
-  "version": "1.5.0",
+  "name": "privaexif",
+  "version": "1.5.1",
   "main": "index.html",
   "window": {
-    "title": "EXIF-B-Gone",
+    "title": "PrivaEXIF",
     "icon": "icon.png",
     "width": 1100,
     "height": 750,

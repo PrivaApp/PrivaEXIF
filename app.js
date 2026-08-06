@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
 
   const CURRENT_VERSION = "v1.5.1";
-  const GITHUB_REPO = "TNFX1/EXIF-B-Gone";
+  const GITHUB_REPO = "PrivaApp/PrivaEXIF";
   const FORMSPREE_ENDPOINT = "https://formspree.io/f/xrenyqgg";
 
   // NW.js veya Node.js ortamı kontrolü
@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', () => {
       btnZip: "Download ZIP",
       inspectorTitle: "Privacy Inspector",
       inspectorEmpty: "Select a file to inspect embedded metadata.",
-      inspectorClean: "File is completely clean! Zero metadata embedded.",
+      inspectorClean: "File is completely clean! Zero sensitive metadata embedded.",
       feedbackTitle: "Send Feedback",
       phFeedbackEmail: "Your Email (optional)",
       phFeedbackMessage: "Write your thoughts or issues...",
@@ -254,7 +254,6 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Sadece hassas/gizlilik riski içeren EXIF ve anahtarları filtrele
   function filterPrivacySensitiveMetadata(rawMeta) {
     if (!rawMeta || typeof rawMeta !== 'object') return {};
 
@@ -497,7 +496,7 @@ document.addEventListener('DOMContentLoaded', () => {
   flipHBtn?.addEventListener('click', () => { currentFlip = !currentFlip; renderInspector(); });
   resetTransformBtn?.addEventListener('click', () => { currentRotation = 0; currentFlip = false; renderInspector(); });
 
-  // Resim / Video İşleme Mantığı
+  // Processing Functions
   async function processImage(item) {
     return new Promise((resolve) => {
       const img = new Image();
@@ -628,10 +627,8 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Hızlı Kaydetme İndirme Fonksiyonu
   async function triggerFastDownload(blob, fileName) {
     if (isNw && fs) {
-      // NW.js Yerel İndirme Penceresi (Işık Hızında)
       const arrayBuffer = await blob.arrayBuffer();
       const buffer = Buffer.from(arrayBuffer);
 
@@ -647,7 +644,6 @@ document.addEventListener('DOMContentLoaded', () => {
       });
       input.click();
     } else {
-      // Standart Web Taraması İndirme
       const a = document.createElement('a');
       a.href = URL.createObjectURL(blob);
       a.download = fileName;

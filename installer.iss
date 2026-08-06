@@ -1,8 +1,8 @@
-#define MyAppName "EXIF-B-Gone"
-#define MyAppVersion "1.5.0"
-#define MyAppPublisher "TNFX1"
-#define MyAppURL "https://github.com/TNFX1/EXIF-B-Gone"
-#define MyAppExeName "EXIF-B-Gone.exe"
+#define MyAppName "PrivaEXIF"
+#define MyAppVersion "1.5.1"
+#define MyAppPublisher "PrivaApp"
+#define MyAppURL "https://github.com/PrivaApp/PrivaEXIF"
+#define MyAppExeName "PrivaEXIF.exe"
 
 [Setup]
 AppId={{8A1B2C3D-4E5F-6A7B-8C9D-0E1F2A3B4C5D}
@@ -16,7 +16,7 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={autopf}\{#MyAppName}
 DisableProgramGroupPage=yes
 OutputDir=dist
-OutputBaseFilename=EXIF-B-Gone-Setup-x64
+OutputBaseFilename=PrivaEXIF-Setup-x64
 Compression=lzma2/ultra64
 SolidCompression=yes
 WizardStyle=modern
@@ -31,11 +31,11 @@ Name: "turkish"; MessagesFile: "compiler:Languages\Turkish.isl"
 Name: "desktopicon"; Description: "{cm:CreateDesktopIcon}"; GroupDescription: "{cm:AdditionalIcons}"; Flags: unchecked
 
 [Files]
-Source: "build_dir\nwjs-v0.83.0-win-x64\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: "build_dir\nwjs-v0.88.0-win-x64\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
-Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\icon.ico"
-Name: "{commondesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon; IconFilename: "{app}\icon.ico"
+Name: "{autoprograms}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"
+Name: "{autodesktop}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; Tasks: desktopicon
 
 [Run]
 Filename: "{app}\{#MyAppExeName}"; Description: "{cm:LaunchProgram,{#StringChange(MyAppName, '&', '&&')}}"; Flags: nowait postinstall skipifsilent
