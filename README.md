@@ -1,6 +1,6 @@
 <div align="center">
 
-  <img src="icon.png" alt="PrivaEXIF Logo" width="128" height="128">
+  <img src="icon.png" alt="PrivaEXIF Logo" width="128">
 
 
   # 🛡️ PrivaEXIF
