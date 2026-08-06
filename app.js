@@ -183,7 +183,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const latestTag = data.tag_name;
 
       if (latestTag && latestTag !== CURRENT_VERSION) {
-        updateStatus.innerHTML = `<span class="text-rose-400 font-bold">New update available: ${latestTag}</span>`;
+        updateStatus.innerHTML = `<span class="text-amber-400 font-medium">New update available: ${latestTag}</span>`;
       } else {
         updateStatus.innerHTML = `<span class="text-emerald-400">You are using the latest version!</span>`;
       }
@@ -198,7 +198,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // File Upload Logic
+  // Drag & Drop
   if (dropZone && fileInput) {
     dropZone.addEventListener('click', (e) => {
       if (e.target !== fileInput) fileInput.click();
@@ -220,13 +220,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     ['dragenter', 'dragover'].forEach(eventName => {
       dropZone.addEventListener(eventName, () => {
-        dropZone.classList.add('border-rose-500', 'bg-rose-500/10');
+        dropZone.classList.add('border-zinc-500', 'bg-zinc-900/80');
       }, false);
     });
 
     ['dragleave', 'drop'].forEach(eventName => {
       dropZone.addEventListener(eventName, () => {
-        dropZone.classList.remove('border-rose-500', 'bg-rose-500/10');
+        dropZone.classList.remove('border-zinc-500', 'bg-zinc-900/80');
       }, false);
     });
 
@@ -364,8 +364,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (queue.length === 0) {
       queueContainer.innerHTML = `
-        <div class="flex flex-col items-center justify-center h-32 text-zinc-600 gap-2">
-          <i class="fa-solid fa-folder-open text-2xl"></i>
+        <div class="flex flex-col items-center justify-center h-28 text-zinc-600 gap-2">
+          <i class="fa-solid fa-inbox text-xl"></i>
           <span class="text-xs" data-i18n="emptyState">${i18n[currentLang || 'en'].emptyState}</span>
         </div>
       `;
@@ -376,23 +376,23 @@ document.addEventListener('DOMContentLoaded', () => {
     queue.forEach((item, index) => {
       const isSelected = index === selectedIndex;
       const card = document.createElement('div');
-      card.className = `flex items-center justify-between p-3 rounded-xl border transition-all cursor-pointer ${
+      card.className = `flex items-center justify-between p-2.5 rounded-lg border transition-all cursor-pointer ${
         isSelected 
-          ? 'bg-rose-500/10 border-rose-500/40 text-rose-200' 
-          : 'bg-zinc-950/60 border-zinc-800/80 hover:border-zinc-700 text-zinc-300'
+          ? 'bg-zinc-800/80 border-zinc-700 text-zinc-100' 
+          : 'bg-zinc-950/60 border-zinc-900 hover:border-zinc-800 text-zinc-400'
       }`;
 
       card.innerHTML = `
         <div class="flex items-center gap-3 overflow-hidden">
-          <div class="w-8 h-8 rounded-lg bg-zinc-900 border border-zinc-800 flex items-center justify-center shrink-0 text-zinc-400 text-xs">
+          <div class="w-7 h-7 rounded bg-zinc-900 border border-zinc-800 flex items-center justify-center shrink-0 text-zinc-400 text-xs">
             <i class="${item.type === 'image' ? 'fa-regular fa-image' : 'fa-solid fa-film'}"></i>
           </div>
           <div class="flex flex-col min-w-0">
             <span class="text-xs font-medium truncate">${item.name}</span>
-            <span class="text-[10px] text-zinc-500">${item.size}</span>
+            <span class="text-[10px] text-zinc-500 font-mono">${item.size}</span>
           </div>
         </div>
-        <button class="remove-btn w-6 h-6 rounded-md hover:bg-zinc-800 flex items-center justify-center text-zinc-500 hover:text-zinc-300 transition-colors text-xs">
+        <button class="remove-btn w-6 h-6 rounded hover:bg-zinc-800 flex items-center justify-center text-zinc-500 hover:text-zinc-300 transition-colors text-xs">
           <i class="fa-solid fa-xmark"></i>
         </button>
       `;
@@ -457,9 +457,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (inspectorPreview) {
       if (item.type === 'image') {
-        inspectorPreview.innerHTML = `<img src="${item.url}" class="max-h-full max-w-full object-contain rounded-lg shadow-md" style="${transformStyle}">`;
+        inspectorPreview.innerHTML = `<img src="${item.url}" class="max-h-full max-w-full object-contain rounded" style="${transformStyle}">`;
       } else {
-        inspectorPreview.innerHTML = `<video src="${item.url}" controls class="max-h-full max-w-full rounded-lg shadow-md" style="${transformStyle}"></video>`;
+        inspectorPreview.innerHTML = `<video src="${item.url}" controls class="max-h-full max-w-full rounded" style="${transformStyle}"></video>`;
       }
     }
 
@@ -472,17 +472,17 @@ document.addEventListener('DOMContentLoaded', () => {
           else if (typeof val === 'object') displayVal = JSON.stringify(val);
 
           const row = document.createElement('div');
-          row.className = 'flex items-center justify-between py-1.5 px-3 rounded-lg bg-zinc-950/40 border border-zinc-900/80 text-xs';
+          row.className = 'flex items-center justify-between py-1.5 px-3 rounded bg-zinc-950 border border-zinc-900 text-xs';
           row.innerHTML = `
             <span class="text-zinc-400 font-mono text-[11px]">${key}</span>
-            <span class="text-rose-400 font-medium truncate max-w-[180px] font-mono text-[11px]" title="${displayVal}">${displayVal}</span>
+            <span class="text-amber-400 font-mono text-[11px] truncate max-w-[200px]" title="${displayVal}">${displayVal}</span>
           `;
           metadataTable.appendChild(row);
         });
       } else {
         metadataTable.innerHTML = `
-          <div class="flex flex-col items-center justify-center p-6 text-emerald-400 gap-2 bg-emerald-500/5 rounded-xl border border-emerald-500/20">
-            <i class="fa-solid fa-shield-check text-xl"></i>
+          <div class="flex flex-col items-center justify-center p-6 text-emerald-400 gap-2 bg-emerald-500/5 rounded-lg border border-emerald-500/20">
+            <i class="fa-solid fa-shield-check text-lg"></i>
             <span class="text-xs font-medium text-center" data-i18n="inspectorClean">${i18n[currentLang || 'en'].inspectorClean}</span>
           </div>
         `;
